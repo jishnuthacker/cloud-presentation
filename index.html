@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canonical Ceph for Cloud</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-bg': '#0B1F3A',
+                        'brand-accent': '#00C2FF',
+                        'brand-dark': '#051124',
+                        'brand-card': '#112B4D',
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-brand-bg text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation Dots -->
+    <div class="fixed right-5 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-3 nav-dots">
+        <a href="#hero" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot active" data-target="hero"></a>
+        <a href="#what-is-ceph" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="what-is-ceph"></a>
+        <a href="#canonical-ceph" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="canonical-ceph"></a>
+        <a href="#architecture" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="architecture"></a>
+        <a href="#features" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="features"></a>
+        <a href="#use-cases" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="use-cases"></a>
+        <a href="#conclusion" class="w-3 h-3 rounded-full bg-white/30 hover:bg-brand-accent transition-colors dot" data-target="conclusion"></a>
+    </div>
+
+    <!-- Canvas for Particle Background -->
+    <canvas id="particle-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Slide 1: Hero -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center z-10 p-6 overflow-hidden snap-start">
+        <div class="max-w-4xl mx-auto text-center hero-content">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full border border-brand-accent/30 bg-brand-accent/10 text-brand-accent text-sm font-semibold tracking-wider">
+                SOFTWARE-DEFINED STORAGE
+            </div>
+            <h1 class="text-5xl md:text-8xl font-bold mb-6 tracking-tight">
+                Canonical <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-500">Ceph</span><br> for Cloud
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-light">
+                The leading open-source storage platform for private, public, and hybrid clouds.
+            </p>
+            <a href="#what-is-ceph" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-accent text-brand-dark font-bold text-lg hover:bg-white hover:scale-105 transition-all shadow-[0_0_20px_rgba(0,194,255,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
+                Start Presentation
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+        </div>
+        
+        <!-- Hero Background Animation Elements -->
+        <div id="hero-nodes" class="absolute inset-0 pointer-events-none z-[-1]"></div>
+    </section>
+
+    <!-- Slide 2: What is Ceph -->
+    <section id="what-is-ceph" class="relative min-h-screen flex items-center justify-center z-10 p-6 snap-start">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="text-left slide-text">
+                <h2 class="text-5xl font-bold mb-6">What is <span class="text-brand-accent">Ceph?</span></h2>
+                <ul class="space-y-6 text-xl text-gray-300">
+                    <li class="flex items-start gap-4">
+                        <div class="mt-1 bg-brand-accent/20 p-2 rounded-lg text-brand-accent"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div>
+                        <p>A unified, distributed storage system designed for excellent performance, reliability, and scalability.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="mt-1 bg-brand-accent/20 p-2 rounded-lg text-brand-accent"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg></div>
+                        <p>Provides <strong class="text-white hover:text-brand-accent cursor-pointer transition-colors block-hover">Block</strong>, <strong class="text-white hover:text-brand-accent cursor-pointer transition-colors object-hover">Object</strong>, and <strong class="text-white hover:text-brand-accent cursor-pointer transition-colors file-hover">File</strong> storage in a single cluster.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <div class="mt-1 bg-brand-accent/20 p-2 rounded-lg text-brand-accent"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg></div>
+                        <p>Self-healing and self-managing with no single point of failure.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative h-[500px] w-full bg-brand-card/30 border border-brand-accent/20 rounded-2xl p-6 flex items-center justify-center overflow-hidden slide-graphic group">
+                <!-- SVG Diagram will be here -->
+                <svg id="ceph-cluster-svg" viewBox="0 0 500 500" class="w-full h-full overflow-visible">
+                    <!-- Base cluster outline -->
+                    <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(0, 194, 255, 0.1)" stroke-width="2" stroke-dasharray="10, 10" />
+                    
+                    <!-- Nodes -->
+                    <g id="storage-nodes">
+                        <!-- Node 1 -->
+                        <rect x="220" y="50" width="60" height="80" rx="8" fill="#112B4D" stroke="#00C2FF" stroke-width="2" class="ceph-node" />
+                        
+                        <!-- Node 2 -->
+                        <rect x="380" y="160" width="60" height="80" rx="8" fill="#112B4D" stroke="#00C2FF" stroke-width="2" class="ceph-node" />
+                        
+                        <!-- Node 3 -->
+                        <rect x="350" y="320" width="60" height="80" rx="8" fill="#112B4D" stroke="#00C2FF" stroke-width="2" class="ceph-node" />
+                        
+                        <!-- Node 4 -->
+                        <rect x="180" y="380" width="60" height="80" rx="8" fill="#112B4D" stroke="#00C2FF" stroke-width="2" class="ceph-node" />
+                        
+                        <!-- Node 5 -->
+                        <rect x="60" y="240" width="60" height="80" rx="8" fill="#112B4D" stroke="#00C2FF" stroke-width="2" class="ceph-node" />
+                    </g>
+
+                    <!-- Client -->
+                    <circle cx="250" cy="250" r="30" fill="#00C2FF" class="client-node relative z-20" />
+                    <text x="250" y="255" fill="#051124" text-anchor="middle" font-size="12" font-weight="bold" font-family="Poppins">App</text>
+
+                    <!-- Connections -->
+                    <g stroke="rgba(0, 194, 255, 0.3)" stroke-width="2" class="network-lines">
+                        <line x1="250" y1="220" x2="250" y2="130" />
+                        <line x1="275" y1="235" x2="380" y2="200" />
+                        <line x1="265" y1="275" x2="350" y2="360" />
+                        <line x1="235" y1="275" x2="210" y2="380" />
+                        <line x1="220" y1="250" x2="120" y2="280" />
+                    </g>
+                    
+                    <!-- Data Packets Container -->
+                    <g id="data-packets"></g>
+                </svg>
+
+                <div class="absolute inset-0 bg-brand-bg/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm pointer-events-none">
+                    <div class="text-center">
+                        <p class="text-brand-accent font-bold text-2xl tracking-widest uppercase data-type-label">LIVE TRAFFIC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Canonical Ceph -->
+    <section id="canonical-ceph" class="relative min-h-screen flex flex-col items-center justify-center z-10 p-6 snap-start">
+        <h2 class="text-5xl font-bold mb-16 text-center section-title">Why <span class="text-orange-500">Canonical</span> Ceph?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full perspective-1000">
+            <!-- Card 1 -->
+            <div class="canonical-card group bg-brand-card/50 backdrop-blur-md border border-gray-700 hover:border-orange-500/50 p-8 rounded-2xl transition-all duration-500 hover:shadow-[0_10px_30px_rgba(249,115,22,0.15)] relative overflow-hidden cursor-pointer transform hover:-translate-y-2">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-all duration-500"></div>
+                <div class="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/30">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white">Ubuntu Integration</h3>
+                <p class="text-gray-400 leading-relaxed">Perfectly optimized for Ubuntu, the world's most popular cloud operating system. Secure, stable, and seamless.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="canonical-card group bg-brand-card/50 backdrop-blur-md border border-gray-700 hover:border-brand-accent/50 p-8 rounded-2xl transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,194,255,0.15)] relative overflow-hidden cursor-pointer transform hover:-translate-y-2 delay-100">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-accent/10 rounded-full blur-2xl group-hover:bg-brand-accent/20 transition-all duration-500"></div>
+                <div class="w-14 h-14 bg-gradient-to-br from-brand-accent to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-brand-accent/30">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white">Simplified Deployment</h3>
+                <p class="text-gray-400 leading-relaxed">Deploy robust clusters in minutes with Charmed Ceph and MicroCeph. Day-0 to Day-2 operations fully automated.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="canonical-card group bg-brand-card/50 backdrop-blur-md border border-gray-700 hover:border-green-400/50 p-8 rounded-2xl transition-all duration-500 hover:shadow-[0_10px_30px_rgba(74,222,128,0.15)] relative overflow-hidden cursor-pointer transform hover:-translate-y-2 delay-200">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-green-400/10 rounded-full blur-2xl group-hover:bg-green-400/20 transition-all duration-500"></div>
+                <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-green-400/30">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-white">Enterprise Support</h3>
+                <p class="text-gray-400 leading-relaxed">Backed by Canonical's 24/7 enterprise support. Up to 10 years of security updates and guaranteed SLAs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Architecture (MOST IMPORTANT) -->
+    <section id="architecture" class="relative min-h-screen flex flex-col items-center justify-center z-10 p-6 snap-start">
+        <div class="text-center mb-10 w-full max-w-6xl flex flex-col md:flex-row justify-between items-center md:items-end arch-header">
+            <div class="text-left mb-4 md:mb-0">
+                <h2 class="text-5xl font-bold mb-2">Ceph <span class="text-brand-accent">Architecture</span></h2>
+                <p class="text-xl text-gray-400">Interactive cluster visualization (Hover nodes)</p>
+            </div>
+            <div class="flex gap-6">
+                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-blue-500 border border-white/20"></div><span class="text-sm text-gray-300">MON (Monitor)</span></div>
+                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-green-500 border border-white/20"></div><span class="text-sm text-gray-300">OSD (Storage)</span></div>
+                <div class="flex items-center gap-2"><div class="w-4 h-4 rounded bg-purple-500 border border-white/20"></div><span class="text-sm text-gray-300">MDS (Metadata)</span></div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-6xl h-[60vh] bg-brand-dark/80 border border-brand-accent/30 rounded-3xl p-8 relative arch-container overflow-hidden backdrop-blur-md shadow-[0_0_50px_rgba(0,194,255,0.05)]">
+            <!-- Tooltip -->
+            <div id="arch-tooltip" class="absolute opacity-0 bg-brand-card/95 border border-brand-accent/50 text-white p-4 rounded-xl shadow-2xl z-50 transition-opacity duration-300 pointer-events-none transform -translate-x-1/2 -translate-y-full mt-[-15px] w-64 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                <div class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-brand-card border-b border-r border-brand-accent/50 rotate-45"></div>
+                <h4 id="tooltip-title" class="font-bold text-brand-accent text-lg mb-1 relative z-10">Title</h4>
+                <p id="tooltip-desc" class="text-sm text-gray-300 relative z-10">Description</p>
+            </div>
+
+            <!-- Architecture SVG container -->
+            <div class="w-full h-full relative flex items-center justify-center" id="arch-svg-container">
+                <!-- Advanced SVG -->
+                <svg id="main-arch-svg" viewBox="0 0 1000 500" class="w-full h-full overflow-visible">
+                    <defs>
+                        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00C2FF" stop-opacity="0.1"/>
+                            <stop offset="100%" stop-color="#00C2FF" stop-opacity="0.5"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Client / App -->
+                    <g class="arch-element cursor-pointer" data-title="Client Application" data-desc="The application or client consuming storage (Block, Object, or File).">
+                        <rect x="400" y="20" width="200" height="60" rx="10" fill="#112B4D" stroke="#ffffff" stroke-width="2"/>
+                        <text x="500" y="55" fill="#ffffff" text-anchor="middle" font-size="20" font-weight="bold">Client Apps</text>
+                    </g>
+
+                    <!-- Connections from Client -->
+                    <g stroke="url(#lineGrad)" stroke-width="3" stroke-dasharray="5,5">
+                        <line x1="450" y1="80" x2="250" y2="150" class="data-flow-line"/>
+                        <line x1="500" y1="80" x2="500" y2="150" class="data-flow-line"/>
+                        <line x1="550" y1="80" x2="750" y2="150" class="data-flow-line"/>
+                    </g>
+
+                    <!-- MON Nodes -->
+                    <g class="arch-element cursor-pointer" data-title="MON (Monitor) Nodes" data-desc="Maintains maps of the cluster state. Essential for coordination and consensus.">
+                        <rect x="150" y="150" width="200" height="80" rx="10" fill="#112B4D" stroke="#3b82f6" stroke-width="3"/>
+                        <circle cx="180" cy="190" r="15" fill="#3b82f6"/>
+                        <circle cx="250" cy="190" r="15" fill="#3b82f6"/>
+                        <circle cx="320" cy="190" r="15" fill="#3b82f6"/>
+                        <text x="250" y="140" fill="#3b82f6" text-anchor="middle" font-size="16" font-weight="bold">Ceph Monitors (MON)</text>
+                    </g>
+
+                    <!-- MDS Nodes -->
+                    <g class="arch-element cursor-pointer" data-title="MDS (Metadata Server)" data-desc="Stores metadata for the Ceph File System (CephFS). Not used for Block/Object.">
+                        <rect x="400" y="150" width="200" height="80" rx="10" fill="#112B4D" stroke="#a855f7" stroke-width="3"/>
+                        <circle cx="460" cy="190" r="15" fill="#a855f7"/>
+                        <circle cx="540" cy="190" r="15" fill="#a855f7"/>
+                        <text x="500" y="140" fill="#a855f7" text-anchor="middle" font-size="16" font-weight="bold">Metadata Server (MDS)</text>
+                    </g>
+
+                    <!-- RGW Nodes -->
+                    <g class="arch-element cursor-pointer" data-title="RADOS Gateway (RGW)" data-desc="Provides object storage interfaces compatible with S3 and Swift.">
+                        <rect x="650" y="150" width="200" height="80" rx="10" fill="#112B4D" stroke="#f59e0b" stroke-width="3"/>
+                        <rect x="700" y="175" width="30" height="30" fill="#f59e0b"/>
+                        <rect x="770" y="175" width="30" height="30" fill="#f59e0b"/>
+                        <text x="750" y="140" fill="#f59e0b" text-anchor="middle" font-size="16" font-weight="bold">RADOS Gateway</text>
+                    </g>
+
+                    <!-- Network Layer -->
+                    <rect x="100" y="270" width="800" height="20" rx="10" fill="#00C2FF" opacity="0.2"/>
+                    <text x="500" y="285" fill="#00C2FF" text-anchor="middle" font-size="14" font-weight="bold">Cluster Network / Public Network</text>
+
+                    <!-- Connections to OSDs -->
+                    <g stroke="rgba(0,194,255,0.3)" stroke-width="2">
+                        <line x1="200" y1="290" x2="200" y2="350"/>
+                        <line x1="400" y1="290" x2="400" y2="350"/>
+                        <line x1="600" y1="290" x2="600" y2="350"/>
+                        <line x1="800" y1="290" x2="800" y2="350"/>
+                    </g>
+
+                    <!-- OSD Layer -->
+                    <text x="500" y="340" fill="#22c55e" text-anchor="middle" font-size="18" font-weight="bold">Ceph OSDs (Object Storage Daemons)</text>
+                    
+                    <!-- OSD Nodes Grids -->
+                    <g id="osd-grid">
+                        <!-- Will be populated by JS -->
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Key Features -->
+    <section id="features" class="relative min-h-screen flex flex-col items-center justify-center z-10 p-6 snap-start">
+        <h2 class="text-5xl font-bold mb-16 text-center feature-title">Key <span class="text-brand-accent">Features</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl w-full">
+            
+            <!-- Scalability -->
+            <div class="feature-item flex flex-col items-center text-center p-6 bg-brand-card/20 rounded-3xl border border-gray-800 hover:border-brand-accent/30 transition-colors">
+                <div class="h-48 w-full bg-brand-card/50 border border-gray-700 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center">
+                    <div id="scale-anim" class="relative w-full h-full flex items-center justify-center">
+                        <div class="w-12 h-16 bg-blue-500 rounded border-2 border-white/20 absolute z-10" id="scale-center-node"></div>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Infinite Scalability</h3>
+                <p class="text-gray-400">Scale out seamlessly from petabytes to exabytes. Add new nodes dynamically without downtime.</p>
+            </div>
+
+            <!-- Fault Tolerance -->
+            <div class="feature-item flex flex-col items-center text-center p-6 bg-brand-card/20 rounded-3xl border border-gray-800 hover:border-red-500/30 transition-colors">
+                <div class="h-48 w-full bg-brand-card/50 border border-gray-700 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center">
+                    <svg id="fault-anim" viewBox="0 0 200 150" class="w-full h-full">
+                        <!-- Populated by JS -->
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Fault Tolerance</h3>
+                <p class="text-gray-400">CRUSH algorithm ensures data is replicated. Automatic self-healing on hardware failure.</p>
+            </div>
+
+            <!-- No Single Point of Failure -->
+            <div class="feature-item flex flex-col items-center text-center p-6 bg-brand-card/20 rounded-3xl border border-gray-800 hover:border-purple-500/30 transition-colors">
+                <div class="h-48 w-full bg-brand-card/50 border border-gray-700 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center">
+                    <svg id="mesh-anim" viewBox="0 0 200 150" class="w-full h-full">
+                        <!-- Populated by JS -->
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">No Single Point of Failure</h3>
+                <p class="text-gray-400">Fully decentralized architecture. Every component is distributed, ensuring maximum uptime.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Slide 6: Use Cases -->
+    <section id="use-cases" class="relative min-h-screen flex flex-col justify-center z-10 p-6 snap-start overflow-hidden">
+        <div class="w-full max-w-7xl mx-auto">
+            <h2 class="text-5xl font-bold mb-16 pl-6 text-white">Use <span class="text-brand-accent">Cases</span></h2>
+            
+            <div class="flex overflow-x-auto pb-10 gap-8 snap-x snap-mandatory hide-scrollbar px-6" id="use-cases-scroll">
+                
+                <!-- OpenStack -->
+                <div class="min-w-[85vw] md:min-w-[450px] h-[450px] bg-gradient-to-br from-brand-card to-brand-dark border border-gray-700 rounded-3xl p-10 flex flex-col snap-center shrink-0 hover:border-brand-accent/80 transition-colors duration-500 group relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-5 group-hover:opacity-20 transition-opacity duration-500 transform translate-x-10 translate-y-10 group-hover:scale-110">
+                        <svg class="w-64 h-64 text-brand-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <div class="w-20 h-20 bg-brand-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-600 group-hover:border-brand-accent transition-colors shadow-lg z-10">
+                        <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 z-10 text-white">OpenStack Cloud</h3>
+                    <p class="text-gray-400 flex-grow text-xl z-10 leading-relaxed">The gold standard storage backend for OpenStack. Tightly integrated with Cinder (Block), Glance (Images), and Nova (Compute).</p>
+                    <div class="h-1.5 w-12 bg-gray-600 group-hover:w-full group-hover:bg-brand-accent transition-all duration-700 ease-out z-10 rounded-full"></div>
+                </div>
+
+                <!-- Backup -->
+                <div class="min-w-[85vw] md:min-w-[450px] h-[450px] bg-gradient-to-br from-brand-card to-brand-dark border border-gray-700 rounded-3xl p-10 flex flex-col snap-center shrink-0 hover:border-brand-accent/80 transition-colors duration-500 group relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-5 group-hover:opacity-20 transition-opacity duration-500 transform translate-x-10 translate-y-10 group-hover:scale-110">
+                        <svg class="w-64 h-64 text-brand-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                    </div>
+                    <div class="w-20 h-20 bg-brand-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-600 group-hover:border-brand-accent transition-colors shadow-lg z-10">
+                        <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 z-10 text-white">Backup & Archive</h3>
+                    <p class="text-gray-400 flex-grow text-xl z-10 leading-relaxed">Cost-effective scalable object storage (S3 compatible) perfect for long-term retention, backups, and disaster recovery.</p>
+                    <div class="h-1.5 w-12 bg-gray-600 group-hover:w-full group-hover:bg-brand-accent transition-all duration-700 ease-out z-10 rounded-full"></div>
+                </div>
+
+                <!-- AI / Big Data -->
+                <div class="min-w-[85vw] md:min-w-[450px] h-[450px] bg-gradient-to-br from-brand-card to-brand-dark border border-gray-700 rounded-3xl p-10 flex flex-col snap-center shrink-0 hover:border-brand-accent/80 transition-colors duration-500 group relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-5 group-hover:opacity-20 transition-opacity duration-500 transform translate-x-10 translate-y-10 group-hover:scale-110">
+                        <svg class="w-64 h-64 text-brand-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div class="w-20 h-20 bg-brand-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-600 group-hover:border-brand-accent transition-colors shadow-lg z-10">
+                        <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 z-10 text-white">AI & Big Data</h3>
+                    <p class="text-gray-400 flex-grow text-xl z-10 leading-relaxed">High-throughput CephFS file system provides the massive bandwidth required for distributed AI training workloads and analytics.</p>
+                    <div class="h-1.5 w-12 bg-gray-600 group-hover:w-full group-hover:bg-brand-accent transition-all duration-700 ease-out z-10 rounded-full"></div>
+                </div>
+
+                <!-- Edge -->
+                <div class="min-w-[85vw] md:min-w-[450px] h-[450px] bg-gradient-to-br from-brand-card to-brand-dark border border-gray-700 rounded-3xl p-10 flex flex-col snap-center shrink-0 hover:border-brand-accent/80 transition-colors duration-500 group relative overflow-hidden">
+                     <div class="absolute right-0 bottom-0 opacity-5 group-hover:opacity-20 transition-opacity duration-500 transform translate-x-10 translate-y-10 group-hover:scale-110">
+                        <svg class="w-64 h-64 text-brand-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    </div>
+                    <div class="w-20 h-20 bg-brand-bg rounded-2xl flex items-center justify-center mb-8 border border-gray-600 group-hover:border-brand-accent transition-colors shadow-lg z-10">
+                        <svg class="w-10 h-10 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4 z-10 text-white">Edge Computing</h3>
+                    <p class="text-gray-400 flex-grow text-xl z-10 leading-relaxed">MicroCeph allows deploying highly available storage clusters on low-resource edge devices with a minimal footprint.</p>
+                    <div class="h-1.5 w-12 bg-gray-600 group-hover:w-full group-hover:bg-brand-accent transition-all duration-700 ease-out z-10 rounded-full"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Conclusion -->
+    <section id="conclusion" class="relative min-h-screen flex flex-col items-center justify-center z-10 p-6 snap-start overflow-hidden">
+        <div class="text-center z-10 relative bg-brand-dark/50 p-16 rounded-3xl backdrop-blur-sm border border-white/10">
+            <h2 class="text-6xl md:text-8xl font-bold mb-8 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 drop-shadow-lg">
+                Scalable.<br>Resilient.<br><span class="text-brand-accent">Software-Defined.</span>
+            </h2>
+            <p class="text-2xl text-gray-300 mb-12">Build your cloud on a solid foundation.</p>
+            
+            <a href="https://ubuntu.com/ceph" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-brand-dark font-bold text-xl hover:bg-brand-accent hover:text-brand-dark hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_rgba(0,194,255,0.6)]">
+                Explore Canonical Ceph
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+        </div>
+        <!-- Conclusion Background Elements -->
+        <div id="conclusion-bg" class="absolute inset-0 pointer-events-none opacity-40 z-0"></div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             oldSlide.classList.remove("exit-up", "exit-down");
+            oldSlide.style.opacity = "0";
+            oldSlide.style.pointerEvents = "none";
             isAnimating = false;
         }, 650);
     };

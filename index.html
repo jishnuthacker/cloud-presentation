@@ -173,13 +173,30 @@
                         <!-- Network Bar -->
                         <rect x="50" y="230" width="800" height="18" rx="9" fill="#00C2FF" opacity="0.15"/>
                         <text x="450" y="244" fill="#00C2FF" text-anchor="middle" font-size="12" font-weight="bold">Cluster Network / Public Network</text>
-                        <!-- Lines to OSDs -->
-                        <g stroke="rgba(0,194,255,0.25)" stroke-width="1.5">
-                            <line x1="150" y1="248" x2="150" y2="290"/><line x1="300" y1="248" x2="300" y2="290"/>
-                            <line x1="450" y1="248" x2="450" y2="290"/><line x1="600" y1="248" x2="600" y2="290"/>
-                            <line x1="750" y1="248" x2="750" y2="290"/>
+
+                        <!-- Lines: Services → Network Bar -->
+                        <g stroke="rgba(0,194,255,0.4)" stroke-width="2">
+                            <!-- MON → Network -->
+                            <line x1="200" y1="190" x2="200" y2="230"/>
+                            <!-- MDS → Network -->
+                            <line x1="450" y1="190" x2="450" y2="230"/>
+                            <!-- RGW → Network -->
+                            <line x1="700" y1="190" x2="700" y2="230"/>
                         </g>
-                        <text x="450" y="285" fill="#22c55e" text-anchor="middle" font-size="14" font-weight="bold">Ceph OSDs (Object Storage Daemons)</text>
+
+                        <!-- Lines: Network Bar → OSD Grid -->
+                        <g stroke="rgba(34,197,94,0.4)" stroke-width="2">
+                            <line x1="110" y1="248" x2="110" y2="310"/>
+                            <line x1="205" y1="248" x2="205" y2="310"/>
+                            <line x1="300" y1="248" x2="300" y2="310"/>
+                            <line x1="395" y1="248" x2="395" y2="310"/>
+                            <line x1="490" y1="248" x2="490" y2="310"/>
+                            <line x1="585" y1="248" x2="585" y2="310"/>
+                            <line x1="680" y1="248" x2="680" y2="310"/>
+                            <line x1="775" y1="248" x2="775" y2="310"/>
+                        </g>
+
+                        <text x="450" y="300" fill="#22c55e" text-anchor="middle" font-size="14" font-weight="bold">Ceph OSDs (Object Storage Daemons)</text>
                         <g id="osd-grid"></g>
                     </svg>
                 </div>

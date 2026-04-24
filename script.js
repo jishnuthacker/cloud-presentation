@@ -37,20 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
         oldSlide.classList.remove("active");
         oldSlide.classList.add(direction === "down" ? "exit-up" : "exit-down");
 
-        // Prepare new slide entry position
+        // Enter new slide
         newSlide.classList.remove("exit-up", "exit-down");
-        newSlide.style.opacity = "0";
-        newSlide.style.transform = direction === "down" ? "translateY(60px) scale(0.97)" : "translateY(-60px) scale(0.97)";
-        newSlide.style.pointerEvents = "none";
-
-        // Force reflow
-        void newSlide.offsetWidth;
-
-        // Animate in
         newSlide.classList.add("active");
-        newSlide.style.opacity = "";
-        newSlide.style.transform = "";
-        newSlide.style.pointerEvents = "";
 
         currentSlide = index;
         updateUI();
@@ -63,8 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             oldSlide.classList.remove("exit-up", "exit-down");
-            oldSlide.style.opacity = "0";
-            oldSlide.style.pointerEvents = "none";
             isAnimating = false;
         }, 650);
     };
